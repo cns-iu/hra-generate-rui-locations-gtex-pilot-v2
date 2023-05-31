@@ -1,0 +1,5 @@
+py script to download rui locations from multiple sources, filter them based on HRA organ model, and then create a new rui_location.jsonld file that only has data associated with those organ models.  
+
+Run update_eui_data.py to generate a rui_locations.jsonld file.
+
+Define organ models in the 2 "target_starts" lists. There is one list for HuBMAP data portal blocks in the "get_hubmap_rui_location" file and one list for blocks not documented in the data portal in the "get_other_asset_rui_locations" file 
