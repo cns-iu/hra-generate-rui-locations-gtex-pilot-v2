@@ -3,10 +3,10 @@ import os
 import subprocess
 
 # Run first script
-subprocess.run(['python', 'get_hubmap_rui_locations.py'])
+subprocess.run(['python', 'get_hubmap_rui_locations'])
 
 # Run second script
-subprocess.run(['python', 'get_other_asset_rui_locations.py'])
+subprocess.run(['python', 'get_other_asset_rui_locations'])
 
 ###update rui_location.jsonld###
 
@@ -29,7 +29,47 @@ for filename in os.listdir(folder_path):
                 graph_items.extend(data["@graph"])
 
 # Create the final JSON-LD data with the combined graph items
-final_data = {"@graph": graph_items}
+final_data = {
+            "@context": {
+                "@base": "http://purl.org/ccf/latest/ccf-entity.owl#",
+                "@vocab": "http://purl.org/ccf/latest/ccf-entity.owl#",
+                "ccf": "http://purl.org/ccf/latest/ccf.owl#",
+                "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+                "label": "rdfs:label",
+                "description": "rdfs:comment",
+                "link": {
+                    "@id": "rdfs:seeAlso",
+                    "@type": "@id"
+                },
+                "samples": {
+                    "@reverse": "has_donor"
+                },
+                "sections": {
+                    "@id": "has_tissue_section",
+                    "@type": "@id"
+                },
+                "datasets": {
+                    "@id": "has_dataset",
+                    "@type": "@id"
+                },
+                "rui_location": {
+                    "@id": "has_spatial_entity",
+                    "@type": "@id"
+                },
+                "ontologyTerms": {
+                    "@id": "has_ontology_term",
+                    "@type": "@id"
+                },
+                "cellTypeTerms": {
+                    "@id": "has_cell_type_term",
+                    "@type": "@id"
+                },
+                "thumbnail": {
+                    "@id": "has_thumbnail"
+                }
+            },
+            "@graph": graph_items
+        }
 
 # Write the final data to the new JSON-LD file
 output_file = "rui_locations.jsonld"
