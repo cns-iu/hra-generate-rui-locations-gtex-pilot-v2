@@ -3,10 +3,10 @@ import os
 import subprocess
 
 # Run first script
-subprocess.run(['python', 'get_hubmap_rui_locations'])
+subprocess.run(['python', 'get_hubmap_rui_locations.py'])
 
 # Run second script
-subprocess.run(['python', 'get_other_asset_rui_locations'])
+subprocess.run(['python', 'get_other_asset_rui_locations.py'])
 
 ###update rui_location.jsonld###
 
